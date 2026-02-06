@@ -1,12 +1,15 @@
 import { io } from "socket.io-client";
 
-let socket;
+let socket = null;
 
 export const connectSocket = (token) => {
-  socket = io("https://YOUR-BACKEND.onrender.com", {
-    auth: { token },
-    transports: ["websocket"],
-  });
+  if (!socket) {
+    socket = io(import.meta.env.VITE_API_URL, {
+      auth: {
+        token: token, // ✅ use passed token
+      },
+    });
+  }
 };
 
 export const getSocket = () => socket;
