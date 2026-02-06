@@ -1,32 +1,12 @@
 import { io } from "socket.io-client";
 
-let socket = null;
+let socket;
 
-/* ============================
-   CONNECT SOCKET
-============================ */
 export const connectSocket = (token) => {
-  if (!socket) {
-    socket = io("https://supplychain-insights-hub.onrender.com", {
-      auth: {
-        token: token, // JWT token
-      },
-      transports: ["websocket"],
-    });
-  }
+  socket = io("https://YOUR-BACKEND.onrender.com", {
+    auth: { token },
+    transports: ["websocket"],
+  });
 };
 
-/* ============================
-   GET SOCKET INSTANCE
-============================ */
 export const getSocket = () => socket;
-
-/* ============================
-   OPTIONAL: DISCONNECT SOCKET
-============================ */
-export const disconnectSocket = () => {
-  if (socket) {
-    socket.disconnect();
-    socket = null;
-  }
-};
